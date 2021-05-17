@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="correct">OK</string>
+    <string name="incorrect">Ошибочка</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="question0">Рутений назван в честь России?</string>
+    <string name="question1">Дейтерий - это изотоп водорода?</string>
+    <string name="question2">Сейчас открыто 118 химических элементов?</string>
+    <string name="question3">Полоний открыла Мария Кюри?</string>
+    <string name="question4">Нихоний назван в честь Японии?</string>
+    <string name="question5">Натрий - это щелочной металл?</string>
+</resources>
