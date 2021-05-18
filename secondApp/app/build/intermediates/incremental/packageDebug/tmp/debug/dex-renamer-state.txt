@@ -1,4 +1,4 @@
-#Tue May 18 18:45:51 MSK 2021
+#Tue May 18 19:24:39 MSK 2021
 base.2=C\:\\Users\\akovt\\AndroidStudioProjects\\secondApp\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
 path.2=5/classes.dex
 base.1=C\:\\Users\\akovt\\AndroidStudioProjects\\secondApp\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
