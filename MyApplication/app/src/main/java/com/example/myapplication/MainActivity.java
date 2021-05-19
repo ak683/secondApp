@@ -13,6 +13,9 @@ public class MainActivity extends AppCompatActivity {
     private Button noBtn;
     private TextView textView;
     private Button showAnswer;
+    //private Button showRes;
+    private StringBuilder res = new StringBuilder();
+
 
     private Question[] questions = new Question[]{
             new Question(R.string.question0,true),
@@ -38,13 +41,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this,R.string.correct,Toast.LENGTH_SHORT).show();
-                if(questions[questionIndex].isAnswerTrue())
-                    Toast.makeText(MainActivity.this,R.string.correct,Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(MainActivity.this,R.string.incorrect,Toast.LENGTH_SHORT).show();
+                if (questions[questionIndex].isAnswerTrue()) {
+                    Toast.makeText(MainActivity.this, R.string.correct, Toast.LENGTH_SHORT).show();
+                    setResult(questionIndex, true);
+                } else {
+                    Toast.makeText(MainActivity.this, R.string.incorrect, Toast.LENGTH_SHORT).show();
+                    setResult(questionIndex, false);
+                }
 
-                questionIndex = (questionIndex+1)%questions.length;
-                textView.setText(questions[questionIndex].getQuestionResId());
+                if (questionIndex < (questions.length - 1)) {
+                    questionIndex++;
+                    textView.setText(questions[questionIndex].getQuestionResId());
+                } else {
+                    showResult();
+                }
+
+                //questionIndex = (questionIndex+1)%questions.length;
+                //textView.setText(questions[questionIndex].getQuestionResId());
             }
         });
 
@@ -54,18 +67,42 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this,R.string.incorrect,Toast.LENGTH_SHORT).show();
-                if(questions[questionIndex].isAnswerTrue())
+                if(questions[questionIndex].isAnswerTrue()){
                     Toast.makeText(MainActivity.this,R.string.incorrect,Toast.LENGTH_SHORT).show();
-                else
+                setResult(questionIndex, false);}
+                else {
                     Toast.makeText(MainActivity.this,R.string.correct,Toast.LENGTH_SHORT).show();
+                setResult(questionIndex, true);}
 
-                questionIndex = (questionIndex+1)%questions.length;
-                textView.setText(questions[questionIndex].getQuestionResId());
+                //questionIndex = (questionIndex+1)%questions.length;
+                //textView.setText(questions[questionIndex].getQuestionResId());
+
+                if (questionIndex < (questions.length - 1)) {
+                    questionIndex++;
+                    textView.setText(questions[questionIndex].getQuestionResId());
+                } else {
+                    showResult();
+                }
             }
         });
 
         textView = findViewById(R.id.textView);
         textView.setText(questions[questionIndex].getQuestionResId());
+
+       /* showRes = findViewById(R.id.showRes);
+        showRes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(MainActivity.this, Res.class);
+                startActivity(intent);
+                showResult();
+
+            }
+        });*/
+
+
+
+
 
         showAnswer = findViewById(R.id.showAnswer);
         showAnswer.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +113,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+
+    public void setResult(int num, boolean question) {
+        res.append(getString(questions[questionIndex].getQuestionResId()) + ": " + ((question) ? "ВЕРНО" : "НЕВЕРНО") + "\n");
+    }
+    private void showResult() {
+        Intent intent = new Intent(MainActivity.this, Res.class);
+
+        intent.putExtra("answerList", res.toString());
+        startActivity(intent);
     }
 
     @Override
